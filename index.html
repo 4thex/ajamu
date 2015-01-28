@@ -4,12 +4,47 @@
   <head>
     <title>Ajamu Demo</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="aja.js"></script> 
+<!-- For production
+    <script src="http://cdn.rawgit.com/4thex/ajamu/master/aja.js"></script> 
+-->
+    <script src="aja.js"></script>
   </head>
 
   <body>
     <aja src="http://freegeoip.net/json/">
       <div>You are here: {city} {region_code}, {country_code}</div>
+    </aja>
+    <aja src="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22nome%2C%20ak%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys">
+      <div>
+        <h3>{query.results.channel.title}</h3>
+        <table>
+          <tr>
+            <td>{query.results.channel.item.forecast[0].day}</td>
+            <td>Temperatures between {query.results.channel.item.forecast[0].high} and {query.results.channel.item.forecast[0].low}.</td>
+            <td>{query.results.channel.item.forecast[0].text}</td>
+          </tr>
+          <tr>
+            <td>{query.results.channel.item.forecast[1].day}</td>
+            <td>Temperatures between {query.results.channel.item.forecast[1].high} and {query.results.channel.item.forecast[1].low}.</td>
+            <td>{query.results.channel.item.forecast[1].text}</td>
+          </tr>
+          <tr>
+            <td>{query.results.channel.item.forecast[2].day}</td>
+            <td>Temperatures between {query.results.channel.item.forecast[2].high} and {query.results.channel.item.forecast[2].low}.</td>
+            <td>{query.results.channel.item.forecast[2].text}</td>
+          </tr>
+          <tr>
+            <td>{query.results.channel.item.forecast[3].day}</td>
+            <td>Temperatures between {query.results.channel.item.forecast[3].high} and {query.results.channel.item.forecast[3].low}.</td>
+            <td>{query.results.channel.item.forecast[3].text}</td>
+          </tr>
+          <tr>
+            <td>{query.results.channel.item.forecast[4].day}</td>
+            <td>Temperatures between {query.results.channel.item.forecast[4].high} and {query.results.channel.item.forecast[4].low}.</td>
+            <td>{query.results.channel.item.forecast[4].text}</td>
+          </tr>
+        </table>
+      </div>
     </aja>
   </body>
 </html>

@@ -10,8 +10,13 @@ if(!String.prototype.escapeRegExp) {
 
 AJAMU.initialize = function() {
   var ajas = document.querySelectorAll("aja");
-  for(var i=0; i<ajas.length; ++i) {
-    var aja = ajas[i];
+  for(var i=ajas.length-1; i>=0; --i) {
+    AJAMU.request({aja: ajas[i]});
+  }
+};
+
+AJAMU.request = function(spec) {
+    var aja = spec.aja;
     aja.style.display = "none";
     var src = aja.getAttribute("src");
     var request = new XMLHttpRequest();
@@ -38,7 +43,6 @@ AJAMU.initialize = function() {
     request.open("GET", src);
     request.responseType = "json";
     request.send();
-  }
 };
 
 AJAMU.replace = function(spec) {
@@ -47,7 +51,6 @@ AJAMU.replace = function(spec) {
     for(var property in spec.value) {
       var value = spec.value[property];
       if(!spec.property) {
-        spec.property = property;
         var qualified = property;
       } else {
         if(Array.isArray(spec.value)) {
@@ -64,7 +67,6 @@ AJAMU.replace = function(spec) {
         var pattern = new RegExp(("{"+ qualified + "}").escapeRegExp());
         templateHtml = templateHtml.replace(pattern, value);
       }
-      spec.property = null;
     }
   };
   replace(spec);
