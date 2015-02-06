@@ -21,8 +21,8 @@ AJAMU.request = function(spec) {
     var src = aja.getAttribute("src");
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
-      if(request.status === 200) {
-        if(request.readyState === 4) {
+      if(request.readyState === 4) {
+        if(request.status === 200) {
           if(request.responseType === "json") {
             aja.value = request.response;  
           } else {
@@ -45,7 +45,9 @@ AJAMU.request = function(spec) {
       } 
     };
     request.open("GET", src);
-    request.responseType = "json";
+    if(request.responseType) {
+      request.responseType = "json";
+    }
     request.send();
 };
 
