@@ -23,7 +23,11 @@ AJAMU.request = function(spec) {
     request.onreadystatechange = function() {
       if(request.status === 200) {
         if(request.readyState === 4) {
-          aja.value = request.response;
+          if(request.responseType === "json") {
+            aja.value = request.response;  
+          } else {
+            aja.value = JSON.parse(request.response);
+          }
           var parent = aja.parentElement;
           var templateElements = aja.children;
           for(var j=templateElements.length-1; j>=0; --j) {
